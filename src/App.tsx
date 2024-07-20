@@ -154,7 +154,7 @@ const Grid = () => {
                 </div>
               ) : (
                 <div className="p-4 bg-gray-200 border">
-                  <EditMode id={kpi.id} cancelButton={removeKpi} />
+                  <EditMode kpi={kpi} cancelButton={removeKpi} />
                 </div>
               )}
               <button
