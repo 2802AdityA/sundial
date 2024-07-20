@@ -21,3 +21,21 @@ export interface Kpi {
 	segmentValue?: string;
 	mode?: string;
 }
+
+export interface RequestBody {
+	metric: string;
+	segmentKey: string;
+	segmentId: string;
+}
+
+export interface Response {
+	data: {
+		metric: string;
+		segmentKey: string;
+		segmentId: string;
+		values: Array<{
+			date: string;
+			value: number;
+		}>;
+	};
+}
