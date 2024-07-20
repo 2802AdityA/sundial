@@ -25,14 +25,15 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
         const selectedSegmentKey = event.target.options[event.target.selectedIndex].getAttribute('data-segment-key');
         setSegmentKey(selectedSegmentKey ?? "");
     };
+    console.log(metric, segment);
 
     return <div>
         <div className="flex flex-col">
 
-            <select id="metric" name="metric" onChange={handleMetricChange}>
+            <select id="metric" name="metric" onChange={handleMetricChange} defaultValue={metricsContext?.metrics.data[0]?.id} value={metric}>
                 {metricsContext?.metrics.data.map((metric) => <option key={metric.id} value={metric.id}>{metric.displayName}</option>)}
             </select>
-            <select name="segments" id="segments" onChange={handleSegmentChange}>
+            <select name="segments" id="segments" value={segment} onChange={handleSegmentChange} defaultValue={segmentsContext?.segments.data[0]?.values[0]?.segmentId}>
                 {segmentsContext?.segments.data.map((segment) => <optgroup key={segment.segmentKey} label={segment.displayName}>
                     {segment.values.map((value) => <option
                         key={value.segmentId}
