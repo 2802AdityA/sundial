@@ -1,7 +1,7 @@
 import * as Highcharts from 'highcharts';
 import { HighchartsReact } from 'highcharts-react-official';
 import { options } from '../config'
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Kpi } from '../interface';
 
 export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
