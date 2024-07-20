@@ -1,4 +1,4 @@
-import { SetStateAction, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { KpiContext, MetricsContext, SegmentsContext } from "../context"
 
 export const EditMode = ({ id, cancelButton }: { id: number, cancelButton: (id: number) => void }) => {
