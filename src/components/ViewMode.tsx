@@ -7,7 +7,7 @@ import axios from 'axios';
 
 export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
 
-    const [chartOptions, setChartOptions] = useState({});
+    const [chartOptions, setChartOptions] = useState<Highcharts.Options>({});
 
     const fetchData = async () => {
         const response = await axios.post("https://sundial-fe-interview.vercel.app/api/snapshot", {
@@ -22,7 +22,7 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
             return [val['date'], val["value"]];
         });
 
-        const options = generateChartOptions(dataArr);
+        const options: Highcharts.Options = generateChartOptions(dataArr);
         setChartOptions(options);
 
 
@@ -32,10 +32,18 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
     useEffect(() => {
         fetchData()
     }, [kpi]);
+
+    if (!chartOptions.chart) {
+        return <div>loading</div>
+    }
+    console.log(chartOptions);
+
     return (
-        <div className='flex flex-col'>
-            <div className='flex justify-end'>
-                <div className='w-4/5 h-1/4'>
+        <div className='flex'>
+
+            <div className=''>
+                <div className='h-1/5'>
+
                     <HighchartsReact
                         highcharts={Highcharts}
                         options={chartOptions}
@@ -43,6 +51,7 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
                     />
                 </div>
             </div>
+
         </div>
     )
 }

@@ -31,38 +31,56 @@ export const Grid = () => {
     };
 
     return (
-        <div className="grid grid-cols-3 gap-2">
-            {
-                kpiContext.kpi.map((kpi, index) => (
-                    <React.Fragment key={kpi.id}>
-                        <div>
-                            <button
-                                onClick={() => addKPI(index, 'left')}
-                                className="p-2 bg-blue-500 text-white rounded"
-                            >
-                                Add Left
-                            </button>
-                            {kpi.mode === 'view' ? (
-                                <div
-                                    className="p-4 bg-gray-200 border cursor-pointer"
-                                    onClick={() => toggleMode(kpi.id)}
-                                >
-                                    <ViewMode kpi={kpi} />
+        <div className="p-6 flex justify-center items-center">
+
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                {
+                    kpiContext.kpi.map((kpi, index) => (
+                        <div className="flex">
+
+                            <React.Fragment key={kpi.id}>
+                                {/* <div className="flex gap-2"> */}
+                                {index === 0 && (<div className="flex justify-center items-center">
+
+                                    <button
+                                        onClick={() => addKPI(index, 'left')}
+                                        className="p-2 h-5 w-5 rounded-full bg-[#119F97] text-white flex items-center justify-center"
+                                    >
+                                        +
+                                    </button>
+                                </div>)}
+                                {kpi.mode === 'view' ? (
+                                    <div
+                                        className="p-4 bg-gray-400 cursor-pointer"
+                                        onClick={() => toggleMode(kpi.id)}
+                                    >
+                                        <div>
+                                            ehd
+                                        </div>
+                                        <ViewMode kpi={kpi} />
+                                    </div>
+                                ) : (
+                                    <div className="p-4">
+                                        <EditMode kpi={kpi} cancelButton={removeKpi} />
+                                    </div>
+                                )}
+
+                                <div className="flex justify-center items-center">
+
+                                    <button
+                                        onClick={() => addKPI(index, 'right')}
+                                        className="p-2 h-5 w-5 rounded-full bg-[#119F97] text-white flex items-center justify-center"
+                                    >
+                                        +
+                                    </button>
                                 </div>
-                            ) : (
-                                <div className="p-4 bg-gray-200 border">
-                                    <EditMode kpi={kpi} cancelButton={removeKpi} />
-                                </div>
-                            )}
-                            <button
-                                onClick={() => addKPI(index, 'right')}
-                                className="p-2 bg-blue-500 text-white rounded"
-                            >
-                                Add Right
-                            </button>
+
+
+                                {/* </div> */}
+                            </React.Fragment>
                         </div>
-                    </React.Fragment>
-                ))}
+                    ))}
+            </div>
         </div>
     );
 };
