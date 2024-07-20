@@ -1,14 +1,15 @@
 import { useContext, useState } from "react"
 import { KpiContext, MetricsContext, SegmentsContext } from "../context"
+import { Kpi } from "../interface";
 
-export const EditMode = ({ id, cancelButton }: { id: number, cancelButton: (id: number) => void }) => {
+export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: number) => void }) => {
     const metricsContext = useContext(MetricsContext);
     const segmentsContext = useContext(SegmentsContext);
     const kpiContext = useContext(KpiContext)
 
-    const [metric, setMetric] = useState("");
-    const [segmentKey, setSegmentKey] = useState("");
-    const [segment, setSegment] = useState("");
+    const [metric, setMetric] = useState(kpi.metric ?? "");
+    const [segmentKey, setSegmentKey] = useState(kpi.segmentKey ?? "");
+    const [segment, setSegment] = useState(kpi.segmentValue ?? "");
 
     const handleMetricChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         console.log(event.target);
@@ -46,17 +47,16 @@ export const EditMode = ({ id, cancelButton }: { id: number, cancelButton: (id: 
 
         </div>
         <div className="">
-            <button onClick={() => { cancelButton(id) }} className="bg-red-200 text-red-700 p-2 rounded-lg text-xl">Cancel</button>
+            <button onClick={() => { cancelButton(kpi.id) }} className="bg-red-200 text-red-700 p-2 rounded-lg text-xl">Cancel</button>
             <button onClick={() => {
                 kpiContext?.setKpi((kpiList) =>
-                    kpiList.map(kpi =>
-                        kpi.id === id
-                            ? { ...kpi, metric: metric, segmentKey: segmentKey, segmentValue: segment, mode: 'view' }
-                            : kpi
+                    kpiList.map(k =>
+                        k.id === kpi.id
+                            ? { ...k, metric: metric, segmentKey: segmentKey, segmentValue: segment, mode: 'view' }
+                            : k
                     )
                 );
-
             }} className="bg-green-400 text-white p-2 rounded-lg text-xl">Add</button>
         </div>
-    </div>
+    </div >
 }
