@@ -3,11 +3,8 @@ export const generateChartOptions: (
 ) => Highcharts.Options = (data: Array<Array<string | number>>) => {
 	return {
 		chart: {
-			className: "min-width:300px",
-			width: 250,
-			height: "20%",
 			type: "areaspline",
-			// width: `'36%'`,
+			backgroundColor: "transparent",
 		},
 		colors: [
 			{
@@ -33,40 +30,11 @@ export const generateChartOptions: (
 		legend: {
 			enabled: false,
 		},
-		// responsive: {
-		// 	rules: [
-		// 		{
-		// 			condition: {
-		// 				maxWidth: 50,
-		// 				maxHeight: 25,
-		// 			},
-		// 			// Make the labels less space demanding on mobile
-		// 			// chartOptions: {
-		// 			// 	xAxis: {
-		// 			// 		labels: {
-		// 			// 			formatter: function () {
-		// 			// 				return this.value.charAt(0);
-		// 			// 			}
-		// 			// 		}
-		// 			// 	},
-		// 			// 	yAxis: {
-		// 			// 		labels: {
-		// 			// 			align: 'left',
-		// 			// 			x: 0,
-		// 			// 			y: -2
-		// 			// 		},
-		// 			// 		title: {
-		// 			// 			text: ''
-		// 			// 		}
-		// 			// 	}
-		// 			// }
-		// 		},
-		// 	],
-		// },
 		series: [
 			{
+				type: "areaspline",
 				data: data,
-				type: "area",
+
 				fillColor: {
 					linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
 					stops: [
@@ -84,8 +52,5 @@ export const generateChartOptions: (
 				},
 			},
 		],
-		tooltip: {
-			enabled: false,
-		},
 	};
 };
