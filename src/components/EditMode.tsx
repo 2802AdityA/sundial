@@ -43,11 +43,11 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
     return <div className="p-2 h-1/5">
         <div className="flex flex-col">
 
-            <select className="rounded-lg p-2 m-2 border-0 bg-gray-100" id="metric" name="metric" onChange={handleMetricChange} defaultValue={metricsContext?.metrics.data[0]?.id} value={metricId}>
+            <select className="rounded-lg p-2 m-2 border-0 bg-gray-100" id="metric" name="metric" onChange={handleMetricChange} value={metricId}>
                 {metricsContext?.metrics.data.map((metric) => <option label={`${metric.displayName}`} key={metric.id} value={metric.id}>{metric.displayName}</option>)}
             </select>
 
-            <select className="rounded-lg p-2 m-2 border-0 bg-gray-100" name="segments" id="segments" value={segmentId} onChange={handleSegmentChange} defaultValue={segmentsContext?.segments.data[0]?.values[0]?.segmentId}>
+            <select className="rounded-lg p-2 m-2 border-0 bg-gray-100" name="segments" id="segments" value={segmentId} onChange={handleSegmentChange} >
                 {segmentsContext?.segments.data.map((segment) => <optgroup key={segment.segmentKey} label={segment.displayName}>
                     {segment.values.map((value) => <option
                         key={value.segmentId}
