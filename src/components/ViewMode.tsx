@@ -37,16 +37,19 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
     }
     console.log(chartOptions);
 
-    return (<div className="h-[184px] p-8 relative">
-        <h5 className="font-medium text-[#808080]">
+    return (<div className="h-[184px]  relative">
+        <div className="font-semibold text-black">
             {kpi.metric?.name || "Metric Name"} |{" "}
             {kpi.segmentValue?.name || "Segment Value"}
-        </h5>
-        <h1 className="mt-6 font-medium text-3xl">12.5k</h1>
-        <span className="flex">
-            3.5%
-            <span className="ml-2 text-[#808080]">Δ7d</span>
-        </span>
+        </div>
+        <div className='flex h-full flex-col justify-center '>
+
+            <div className="mt-6 font-medium text-3xl">12.5k</div>
+            <span className="flex">
+                3.5%
+                <span className="ml-2 text-[#808080]">Δ7d</span>
+            </span>
+        </div>
         <div className="absolute w-[60%] h-full right-0 top-0">
             <HighchartsReact
                 highcharts={Highcharts}
