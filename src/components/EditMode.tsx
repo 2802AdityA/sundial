@@ -7,22 +7,19 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
     const segmentsContext = useContext(SegmentsContext);
     const kpiContext = useContext(KpiContext)
 
-    const [metricId, setMetricId] = useState(kpi.metric?.id ?? "");
-    const [metricName, setMetricName] = useState(kpi.metric?.name ?? "");
-    const [segmentKeyId, setSegmentKeyId] = useState(kpi.segmentKey?.id ?? "");
-    const [segmentKeyName, setSegmentKeyName] = useState(kpi.segmentKey?.name ?? "");
+    const [metricId, setMetricId] = useState(kpi.metric?.id ?? metricsContext?.metrics.data[0].id ?? "");
+    const [metricName, setMetricName] = useState(kpi.metric?.name ?? metricsContext?.metrics.data[0].displayName ?? "");
+    const [segmentKeyId, setSegmentKeyId] = useState(kpi.segmentKey?.id ?? segmentsContext?.segments.data[0].segmentKey ?? "");
+    const [segmentKeyName, setSegmentKeyName] = useState(kpi.segmentKey?.name ?? segmentsContext?.segments.data[0].displayName ?? "");
 
-    const [segmentId, setSegmentId] = useState(kpi.segmentValue?.id ?? "");
-    const [segmentName, setSegmentName] = useState(kpi.segmentValue?.name ?? "");
+    const [segmentId, setSegmentId] = useState(kpi.segmentValue?.id ?? segmentsContext?.segments.data[0].values[0].segmentId ?? "");
+    const [segmentName, setSegmentName] = useState(kpi.segmentValue?.name ?? segmentsContext?.segments.data[0].values[0].displayName ?? "");
 
     const handleMetricChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        // console.log(event.target);
         const metricId = event.target.value;
         const metricName = event.target.options[event.target.selectedIndex].label;
         setMetricId(metricId);
         setMetricName(metricName)
-        // console.log(event.target.value);
-        // console.log(event.target);
     };
 
 
@@ -42,11 +39,6 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
         setSegmentKeyName(`${segmentKeyName}`);
 
     };
-    console.log(metricId, metricName)
-    console.log(segmentKeyId, segmentKeyName);
-    console.log(segmentId, segmentName)
-
-
 
     return <div className="p-2 h-1/5">
         <div className="flex flex-col">
