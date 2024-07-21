@@ -16,7 +16,6 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
             segmentKey: kpi.segmentKey?.id,
             segmentId: kpi.segmentValue?.id
         });
-        console.log(response);
 
         const data: Response = response.data;
         const dataArr = data.data.values.map((val) => {
@@ -24,8 +23,6 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
         });
 
         dataArr.reverse()
-        console.log(dataArr);
-
 
         const options: Highcharts.Options = generateChartOptions(dataArr);
         setChartData(dataArr);
@@ -52,10 +49,6 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
     const compareValues = (data: Array<Array<string | number>> | undefined) => {
         const latestValue: number = Number(data?.at(data.length - 1)?.at(1));
         const oldestValue: number = Number(data?.at(0)?.at(1));
-        console.log(latestValue, oldestValue);
-        console.log(chartData);
-
-
         return latestValue > oldestValue ? 1 : -1
     }
 
@@ -77,11 +70,9 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
     }
 
 
-    // console.log(chartOptions);
-
     return (<div className="p-2 md:p-4 lg:p-7 h-[200px] flex flex-col relative">
 
-        <div className="z-5 font-semibol text-sm text-black">
+        <div className="z-5 font-semibold text-sm text-black">
             {kpi.metric?.name || "Metric Name"} |{" "}
             {kpi.segmentValue?.name || "Segment Value"}
         </div>

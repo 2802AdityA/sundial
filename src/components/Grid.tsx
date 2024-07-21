@@ -48,21 +48,14 @@ export const Grid = () => {
 
     const getRightButtonLgClass = (index: number, length: number) => {
         if (index + 1 === length || (index + 1) % 3 === 0) {
-            // console.log(index + ' v');
-
             return "lg:block"
         }
-        // console.log(index + ' nv');
         return "lg:hidden"
     }
     const getRightButtonMdClass = (index: number, length: number) => {
         if (index + 1 === length || (index + 1) % 2 === 0) {
-            console.log(index + ' v');
-
             return "md:block "
         }
-        console.log(index + ' nv');
-
         return "md:hidden"
     }
 
