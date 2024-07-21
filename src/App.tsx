@@ -32,9 +32,18 @@ export default function App() {
       kpiContext?.setKpi([
         {
           id: Date.now(),
-          metric: metricsData.data[0].id,
-          segmentKey: segmentsData.data[0].segmentKey,
-          segmentValue: segmentsData.data[0].values[0].segmentId,
+          metric: {
+            id: metricsData.data[0].id,
+            name: metricsData.data[0].displayName,
+          },
+          segmentKey: {
+            id: segmentsData.data[0].segmentKey,
+            name: segmentsData.data[0].displayName
+          },
+          segmentValue: {
+            id: segmentsData.data[0].values[0].segmentId,
+            name: segmentsData.data[0].values[0].displayName
+          },
           mode: 'edit'
         },
       ]);

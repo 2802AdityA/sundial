@@ -32,7 +32,7 @@ export const Grid = () => {
 
     const getGridClasses = (index: number, length: number) => {
         if (length % 3 === 1 && index === length - 1) {
-            return 'lg:col-span-6';
+            return 'lg:col-span-6 md:col-span-2';
         }
         if (length % 3 === 2 && index >= length - 2) {
             return 'lg:col-span-3';
@@ -51,7 +51,7 @@ export const Grid = () => {
                     kpiContext.kpi.map((kpi, index) => (
                         <div
                             key={kpi.id}
-                            className={`relative border-x  w-full ${getGridClasses(index, kpiContext.kpi.length)} gap-10`}
+                            className={`relative border w-full ${getGridClasses(index, kpiContext.kpi.length)} gap-10`}
                         >
 
                             <React.Fragment key={kpi.id}>
@@ -66,16 +66,13 @@ export const Grid = () => {
                                 </div>
                                 {kpi.mode === 'view' ? (
                                     <div
-                                        className="p-4 bg-gray-400 w-full cursor-pointer"
+                                        className="p-4 w-full cursor-pointer h-56"
                                         onClick={() => toggleMode(kpi.id)}
                                     >
-                                        <div>
-                                            ehd
-                                        </div>
                                         <ViewMode kpi={kpi} />
                                     </div>
                                 ) : (
-                                    <div className="p-4 w-full">
+                                    <div className="p-4 h-56 w-full ">
                                         <EditMode kpi={kpi} cancelButton={removeKpi} />
                                     </div>
                                 )}

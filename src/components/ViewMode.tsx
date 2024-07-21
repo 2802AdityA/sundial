@@ -11,9 +11,9 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
 
     const fetchData = async () => {
         const response = await axios.post("https://sundial-fe-interview.vercel.app/api/snapshot", {
-            metric: kpi.metric,
-            segmentKey: kpi.segmentKey,
-            segmentId: kpi.segmentValue
+            metric: kpi.metric?.id,
+            segmentKey: kpi.segmentKey?.id,
+            segmentId: kpi.segmentValue?.id
         });
         console.log(response);
 
@@ -39,19 +39,25 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
     console.log(chartOptions);
 
     return (
-        <div className='flex'>
-
-            <div className=''>
-                <div className='h-1/5'>
-
-                    <HighchartsReact
-                        highcharts={Highcharts}
-                        options={chartOptions}
-                        ref={chartComponentRef}
-                    />
-                </div>
+        <div className="h-[10px] p-8 relative">
+            <h5 className="font-medium text-[#808080]">
+                {kpi.metric?.name || "segment key"} |{" "}
+                {kpi.segmentValue?.name || "segment ID"}
+            </h5>
+            <div className="mt-6 font-medium lg:text-3xl md:text-2xl text-xl">12.5k</div>
+            <span className="flex">
+                {/* <Up /> */}
+                3.5%
+                <span className="ml-2 text-[#808080]">Δ7d</span>
+            </span>
+            <div className="absolute w-[60%] h-full right-0 top-0">
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={chartOptions}
+                    constructorType={"chart"}
+                    containerProps={{ className: "h-full w-full" }}
+                />
             </div>
-
         </div>
     )
 }
