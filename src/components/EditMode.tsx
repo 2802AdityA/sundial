@@ -62,7 +62,7 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
 
         </div>
         <div className="m-2 gap-4 flex justify-center">
-            <button onClick={() => { cancelButton(kpi.id) }} className="w-full bg-red-200 text-red-700 p-2 rounded-lg text-xl">Cancel</button>
+            <button onClick={() => { cancelButton(kpi.id) }} className="w-full bg-[#FFECE7] text-[#FF5D39] p-2 rounded-lg text-xl">Cancel</button>
             <button onClick={() => {
                 kpiContext?.setKpi((kpiList) =>
                     kpiList.map(k =>
@@ -71,7 +71,7 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
                             : k
                     )
                 );
-            }} className="bg-green-400 w-full text-white p-2 rounded-lg text-xl">Add</button>
+            }} className="bg-[#119F97] w-full text-white p-2 rounded-lg text-xl">Add</button>
         </div>
     </div >
 }
