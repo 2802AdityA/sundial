@@ -8,6 +8,7 @@ import axios from 'axios';
 export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
 
     const [chartOptions, setChartOptions] = useState<Highcharts.Options>({});
+    const [chartData, setChartData] = useState<Array<Array<string | number>>>();
 
     const fetchData = async () => {
         const response = await axios.post("https://sundial-fe-interview.vercel.app/api/snapshot", {
@@ -22,10 +23,40 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
             return [val['date'], val["value"]];
         });
 
+        dataArr.reverse()
+        console.log(dataArr);
+
+
         const options: Highcharts.Options = generateChartOptions(dataArr);
+        setChartData(dataArr);
         setChartOptions(options);
+    }
+
+    const getNumberData = (data: string | number | undefined) => {
+        data = Number(data)
+        if (data >= 1000) {
+            return (data / 1000).toFixed(1) + "K";
+        }
+        return data.toString();
+    }
+
+    const getPercentage = (data: Array<Array<string | number>> | undefined) => {
+        const latestValue: number = Number(data?.at(data.length - 1)?.at(1));
+        const oldestValue: number = Number(data?.at(0)?.at(1));
+
+        const percentage: number = (latestValue - oldestValue) * 100 / (latestValue);
+
+        return Math.abs(Number(percentage.toFixed(2)));
+    }
+
+    const compareValues = (data: Array<Array<string | number>> | undefined) => {
+        const latestValue: number = Number(data?.at(data.length - 1)?.at(1));
+        const oldestValue: number = Number(data?.at(0)?.at(1));
+        console.log(latestValue, oldestValue);
+        console.log(chartData);
 
 
+        return latestValue > oldestValue ? 1 : -1
     }
 
     useEffect(() => {
@@ -44,22 +75,12 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
             </div>
         </div>
     }
+
+
     // console.log(chartOptions);
 
     return (<div className="p-2 md:p-4 lg:p-7 h-[200px] relative">
-        <div className="font-semibold text-sm text-black">
-            {kpi.metric?.name || "Metric Name"} |{" "}
-            {kpi.segmentValue?.name || "Segment Value"}
-        </div>
-        <div className='flex  h-full flex-col justify-end'>
-
-            <div className="mt-6 font-semibold sm:text-sm md:text-3xl  ">12.5K</div>
-            <div className="flex text-gray-800">
-                3.5%
-                <div className="ml-2 text-[#808080]">Δ7d</div>
-            </div>
-        </div>
-        <div className="absolute w-[60%] h-full right-0 bottom-0">
+        <div className="z-0 absolute w-[60%] h-full right-0 bottom-0">
             <HighchartsReact
                 highcharts={Highcharts}
                 options={chartOptions}
@@ -67,6 +88,28 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
                 containerProps={{ className: "h-full w-full" }}
             />
         </div>
+        <div className="z-5 font-semibol text-sm text-black">
+            {kpi.metric?.name || "Metric Name"} |{" "}
+            {kpi.segmentValue?.name || "Segment Value"}
+        </div>
+        <div className='flex  h-full flex-col justify-end'>
+
+            <div className="mt-6 font-medium sm:text-sm md:text-3xl  ">{getNumberData(chartData?.at(-1)?.at(1))}</div>
+            <div className="flex text-gray-800">
+                {compareValues(chartData) === 1 ? (<span className='text-[#119F97]'>
+                    {'\u2191'}
+
+                </span>) : (<span className='text-red-700'>
+
+                    {`\u2193`}
+                </span>)}
+
+
+                {getPercentage(chartData)}
+                <div className="ml-2 text-[#808080]">{`Δ${chartData?.length}d`}</div>
+            </div>
+        </div>
+
     </div>
     )
 }
