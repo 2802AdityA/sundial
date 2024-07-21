@@ -30,16 +30,32 @@ export const Grid = () => {
         kpiContext.setKpi(kpiList)
     };
 
+    const getGridClasses = (index: number, length: number) => {
+        if (length % 3 === 1 && index === length - 1) {
+            return 'lg:col-span-6';
+        }
+        if (length % 3 === 2 && index >= length - 2) {
+            return 'lg:col-span-3';
+        }
+        return 'lg:col-span-2';
+    };
+
+
+
+
     return (
         <div className="p-6 flex w-full justify-center items-center">
 
-            <div className="grid w-full grid-cols-3 gap-2">
+            <div className="grid w-full max-w-screen-lg gap-y-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-6">
                 {
                     kpiContext.kpi.map((kpi, index) => (
-                        <div className="flex">
+                        <div
+                            key={kpi.id}
+                            className={`relative border-x  w-full ${getGridClasses(index, kpiContext.kpi.length)} gap-10`}
+                        >
 
                             <React.Fragment key={kpi.id}>
-                                <div className="flex justify-center items-center">
+                                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 rounded-full shadow-lg  transition-opacity duration-200">
 
                                     <button
                                         onClick={() => addKPI(index, 'left')}
@@ -64,7 +80,7 @@ export const Grid = () => {
                                     </div>
                                 )}
 
-                                <div className="flex justify-center items-center">
+                                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 rounded-full shadow-lg  transition-opacity duration-200">
 
                                     <button
                                         onClick={() => addKPI(index, 'right')}
@@ -73,6 +89,7 @@ export const Grid = () => {
                                         +
                                     </button>
                                 </div>
+
                             </React.Fragment>
                         </div>
                     ))}
