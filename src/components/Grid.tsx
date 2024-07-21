@@ -67,9 +67,9 @@ export const Grid = () => {
     }
 
     return (
-        <div className="p-6 max-w-full flex w-full justify-center items-center">
+        <div className="p-6 h-screen flex w-screen justify-center items-center">
 
-            <div className="grid w-full max-w-screen-lg grid-cols-1 md:grid-cols-2 lg:grid-cols-6">
+            <div className="grid w-screen grid-cols-1 md:grid-cols-2 lg:grid-cols-6">
                 {
                     kpiContext.kpi.map((kpi, index) => (
                         <div
