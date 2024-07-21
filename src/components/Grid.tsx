@@ -67,7 +67,7 @@ export const Grid = () => {
     }
 
     return (
-        <div className="p-6 flex w-full justify-center items-center">
+        <div className="p-6 max-w-full flex w-full justify-center items-center">
 
             <div className="grid w-full max-w-screen-lg grid-cols-1 md:grid-cols-2 lg:grid-cols-6">
                 {
@@ -79,7 +79,7 @@ export const Grid = () => {
 
                             <React.Fragment key={kpi.id}>
 
-                                <div className="absolute group  left-0 top-1/2 transform -translate-y-1/2 -translate-x-[50%] rounded-full shadow-lg  transition-opacity duration-200">
+                                <div className="absolute group  left-0 top-1/2 transform -translate-y-1/2 -translate-x-[50%] rounded-full transition-opacity duration-200 hover:opacity-100 opacity-0">
 
                                     <button
                                         onClick={() => addKPI(index, 'left')}
@@ -90,19 +90,19 @@ export const Grid = () => {
                                 </div>
                                 {kpi.mode === 'view' ? (
                                     <div
-                                        className="p-4 border-x my-5 w-full cursor-pointer h-56"
+                                        className=" border-x my-5 w-full cursor-pointer"
                                         onClick={() => toggleMode(kpi.id)}
                                     >
                                         <ViewMode kpi={kpi} />
                                     </div>
                                 ) : (
-                                    <div className="p-4 border-x my-5 h-56 w-full ">
+                                    <div className=" border-x my-5 w-full ">
                                         <EditMode kpi={kpi} cancelButton={removeKpi} />
                                     </div>
                                 )}
 
 
-                                <div className={`absolute group  ${getRightButtonLgClass(index, kpiContext.kpi.length)} ${getRightButtonMdClass(index, kpiContext.kpi.length)} sm:block right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 rounded-full shadow-lg  transition-opacity duration-200`}>
+                                <div className={`absolute group  ${getRightButtonLgClass(index, kpiContext.kpi.length)} ${getRightButtonMdClass(index, kpiContext.kpi.length)} sm:block right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 rounded-full transition-opacity duration-200`}>
 
                                     <button
                                         onClick={() => addKPI(index, 'right')}
