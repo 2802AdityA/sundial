@@ -79,34 +79,38 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
 
     // console.log(chartOptions);
 
-    return (<div className="p-2 md:p-4 lg:p-7 h-[200px] relative">
-        <div className="z-0 absolute w-[60%] h-full right-0 bottom-0">
-            <HighchartsReact
-                highcharts={Highcharts}
-                options={chartOptions}
-                constructorType={"chart"}
-                containerProps={{ className: "h-full w-full" }}
-            />
-        </div>
+    return (<div className="p-2 md:p-4 lg:p-7 h-[200px] flex flex-col relative">
+
         <div className="z-5 font-semibol text-sm text-black">
             {kpi.metric?.name || "Metric Name"} |{" "}
             {kpi.segmentValue?.name || "Segment Value"}
         </div>
-        <div className='flex  h-full flex-col justify-end'>
+        <div className='flex h-full'>
 
-            <div className="mt-6 font-medium sm:text-sm md:text-3xl  ">{getNumberData(chartData?.at(-1)?.at(1))}</div>
-            <div className="flex text-gray-800">
-                {compareValues(chartData) === 1 ? (<span className='text-[#119F97]'>
-                    {'\u2191'}
+            <div className='flex  h-full flex-col justify-end'>
 
-                </span>) : (<span className='text-red-700'>
+                <div className="mt-6 font-medium text-lg sm:text-3xl md:text-3xl  ">{getNumberData(chartData?.at(-1)?.at(1))}</div>
+                <div className="flex text-xs sm:text-md  text-gray-800">
+                    {compareValues(chartData) === 1 ? (<span className='text-[#119F97]'>
+                        {'\u2191'}
 
-                    {`\u2193`}
-                </span>)}
+                    </span>) : (<span className='text-red-700'>
+
+                        {`\u2193`}
+                    </span>)}
 
 
-                {getPercentage(chartData)}
-                <div className="ml-2 text-[#808080]">{`Δ${chartData?.length}d`}</div>
+                    {getPercentage(chartData)}
+                    <div className="ml-2 text-[#808080]">{`Δ${chartData?.length}d`}</div>
+                </div>
+            </div>
+            <div className="z-0 absolute w-[60%] h-full right-0 bottom-0">
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={chartOptions}
+                    constructorType={"chart"}
+                    containerProps={{ className: "h-full w-full" }}
+                />
             </div>
         </div>
 
