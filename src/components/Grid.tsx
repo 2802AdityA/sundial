@@ -30,9 +30,9 @@ export const Grid = () => {
         kpiContext.setKpi(kpiList)
     };
 
-    const getGridClasses = (index: number, length: number) => {
+    const getLgSpanClass = (index: number, length: number) => {
         if (length % 3 === 1 && index === length - 1) {
-            return 'lg:col-span-6 md:col-span-2';
+            return 'lg:col-span-6';
         }
         if (length % 3 === 2 && index >= length - 2) {
             return 'lg:col-span-3';
@@ -40,18 +40,21 @@ export const Grid = () => {
         return 'lg:col-span-2';
     };
 
-
-
+    const getMdSpanClass = (index: number, length: number) => {
+        if (length % 2 === 1 && index === length - 1) {
+            return 'md:col-span-2';
+        }
+    };
 
     return (
         <div className="p-6 flex w-full justify-center items-center">
 
-            <div className="grid w-full max-w-screen-lg gap-y-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-6">
+            <div className="grid w-full max-w-screen-lg gap-y-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-6">
                 {
                     kpiContext.kpi.map((kpi, index) => (
                         <div
                             key={kpi.id}
-                            className={`relative border w-full ${getGridClasses(index, kpiContext.kpi.length)} gap-10`}
+                            className={`relative border  w-full ${getLgSpanClass(index, kpiContext.kpi.length)} ${getMdSpanClass(index, kpiContext.kpi.length)} gap-10`}
                         >
 
                             <React.Fragment key={kpi.id}>
