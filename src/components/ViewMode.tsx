@@ -27,7 +27,7 @@ export const ViewMode = ({ kpi }: { kpi: Kpi }) => {
 
 
     }
-    const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+    // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
     useEffect(() => {
         fetchData()
