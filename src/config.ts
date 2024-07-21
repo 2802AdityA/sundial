@@ -53,7 +53,7 @@ export const generateChartOptions: (
 			},
 		],
 		tooltip: {
-			enabled: false,
+			enabled: true,
 		},
 	};
 };
