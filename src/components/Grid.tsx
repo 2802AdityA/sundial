@@ -31,16 +31,15 @@ export const Grid = () => {
     };
 
     return (
-        <div className="p-6 flex justify-center items-center">
+        <div className="p-6 flex w-full justify-center items-center">
 
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div className="grid w-full grid-cols-3 gap-2">
                 {
                     kpiContext.kpi.map((kpi, index) => (
                         <div className="flex">
 
                             <React.Fragment key={kpi.id}>
-                                {/* <div className="flex gap-2"> */}
-                                {index === 0 && (<div className="flex justify-center items-center">
+                                <div className="flex justify-center items-center">
 
                                     <button
                                         onClick={() => addKPI(index, 'left')}
@@ -48,10 +47,10 @@ export const Grid = () => {
                                     >
                                         +
                                     </button>
-                                </div>)}
+                                </div>
                                 {kpi.mode === 'view' ? (
                                     <div
-                                        className="p-4 bg-gray-400 cursor-pointer"
+                                        className="p-4 bg-gray-400 w-full cursor-pointer"
                                         onClick={() => toggleMode(kpi.id)}
                                     >
                                         <div>
@@ -60,7 +59,7 @@ export const Grid = () => {
                                         <ViewMode kpi={kpi} />
                                     </div>
                                 ) : (
-                                    <div className="p-4">
+                                    <div className="p-4 w-full">
                                         <EditMode kpi={kpi} cancelButton={removeKpi} />
                                     </div>
                                 )}
@@ -74,12 +73,10 @@ export const Grid = () => {
                                         +
                                     </button>
                                 </div>
-
-
-                                {/* </div> */}
                             </React.Fragment>
                         </div>
                     ))}
+
             </div>
         </div>
     );

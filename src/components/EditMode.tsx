@@ -27,13 +27,12 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
     };
     console.log(metric, segment);
 
-    return <div>
+    return <div className="p-2">
         <div className="flex flex-col">
-
-            <select id="metric" name="metric" onChange={handleMetricChange} defaultValue={metricsContext?.metrics.data[0]?.id} value={metric}>
+            <select className="rounded-lg p-2 m-2 border-0 bg-gray-100" id="metric" name="metric" onChange={handleMetricChange} defaultValue={metricsContext?.metrics.data[0]?.id} value={metric}>
                 {metricsContext?.metrics.data.map((metric) => <option key={metric.id} value={metric.id}>{metric.displayName}</option>)}
             </select>
-            <select name="segments" id="segments" value={segment} onChange={handleSegmentChange} defaultValue={segmentsContext?.segments.data[0]?.values[0]?.segmentId}>
+            <select className="rounded-lg p-2 m-2 border-0 bg-gray-100" name="segments" id="segments" value={segment} onChange={handleSegmentChange} defaultValue={segmentsContext?.segments.data[0]?.values[0]?.segmentId}>
                 {segmentsContext?.segments.data.map((segment) => <optgroup key={segment.segmentKey} label={segment.displayName}>
                     {segment.values.map((value) => <option
                         key={value.segmentId}
@@ -47,8 +46,8 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
             </select>
 
         </div>
-        <div className="">
-            <button onClick={() => { cancelButton(kpi.id) }} className="bg-red-200 text-red-700 p-2 rounded-lg text-xl">Cancel</button>
+        <div className="m-2 gap-4 flex justify-center">
+            <button onClick={() => { cancelButton(kpi.id) }} className="w-full bg-red-200 text-red-700 p-2 rounded-lg text-xl">Cancel</button>
             <button onClick={() => {
                 kpiContext?.setKpi((kpiList) =>
                     kpiList.map(k =>
@@ -57,7 +56,7 @@ export const EditMode = ({ kpi, cancelButton }: { kpi: Kpi, cancelButton: (id: n
                             : k
                     )
                 );
-            }} className="bg-green-400 text-white p-2 rounded-lg text-xl">Add</button>
+            }} className="bg-green-400 w-full text-white p-2 rounded-lg text-xl">Add</button>
         </div>
     </div >
 }
