@@ -16,9 +16,18 @@ export interface SegmentResponse {
 
 export interface Kpi {
 	id: number;
-	metric?: string;
-	segmentKey?: string;
-	segmentValue?: string;
+	metric?: {
+		id: string;
+		name: string;
+	};
+	segmentKey?: {
+		id: string;
+		name: string;
+	};
+	segmentValue?: {
+		id: string;
+		name: string;
+	};
 	mode?: string;
 }
 
